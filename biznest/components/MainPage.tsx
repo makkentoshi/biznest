@@ -9,6 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import MainFooter from '@/components/main/footer';
 import MainHeader from '@/components/main/header';
+import Image from 'next/image';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -85,10 +86,10 @@ export default function MainPage() {
               Инновации начинаются здесь
             </h1>
             <p className="hero-description text-xl md:text-2xl mb-12 max-w-3xl mx-auto">
-              Tech Hub - это место, где технологии встречаются с возможностями. 
+              Biz Nest - это место, где технологии встречаются с возможностями. 
               Создавайте, развивайтесь и меняйте мир вместе с нами.
             </p>
-            <Link href="/home" className="hero-button inline-block">
+            <Link href="/main" className="hero-button inline-block">
               <Button size="lg" className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6">
                 Начать путешествие <ArrowRight className="ml-2" />
               </Button>
@@ -124,7 +125,9 @@ export default function MainPage() {
                 <div key={index} className="feature-card group">
                   <div className="relative overflow-hidden rounded-xl aspect-video mb-6">
                     <div className="absolute inset-0 bg-blue-600/20 group-hover:bg-blue-600/30 transition-colors" />
-                    <img
+                    <Image
+                    width={500}
+                    height={500}
                       src={feature.image}
                       alt={feature.title}
                       className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"

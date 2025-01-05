@@ -6,6 +6,7 @@ import { Button } from '../ui/button';
 import { Share2, Heart } from 'lucide-react';
 import gsap from 'gsap';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const programs = [
   {
@@ -51,7 +52,9 @@ export default function FeaturedPrograms() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {programs.map((program, index) => (
           <Card key={index} className="program-card overflow-hidden">
-            <img
+            <Image
+            width={500}
+            height={500}
               src={program.image}
               alt={program.title}
               className="w-full h-48 object-cover"

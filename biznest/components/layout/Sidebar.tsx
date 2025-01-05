@@ -4,25 +4,24 @@ import { usePathname, useRouter } from 'next/navigation';
 import { 
   Home, BookOpen, Calculator, FileCode2, Calendar, Users, 
   School, Building2, ShoppingBag, Plane, BarChart3, Info, 
-  Mail, Instagram 
+  Mail, Instagram , BotIcon, PackageOpen
 } from 'lucide-react';
 
 const menuItems = [
-  { icon: Home, label: 'Лента', path: '/' },
-  { icon: BookOpen, label: 'Программы', path: '/programs' },
-  { icon: Calculator, label: 'Налоговые льготы', path: '/tax-benefits', hasSubmenu: true },
-  { icon: FileCode2, label: 'Технологические задачи', path: '/tech-tasks' },
-  { icon: Calendar, label: 'Мероприятия', path: '/events' },
-  { icon: Users, label: 'Люди и компании', path: '/people' },
-  { icon: School, label: 'Tech Orda', path: '/tech-orda' },
-  { icon: Building2, label: 'Вакансии', path: '/jobs' },
-  { icon: ShoppingBag, label: 'Маркетплейс', path: '/marketplace' },
-  { icon: Plane, label: 'Релокация', path: '/relocation', hasSubmenu: true },
-  { icon: BarChart3, label: 'Аналитика', path: '/analytics' },
+  { icon: Home, label: 'Начальная страница', path: '/' },
+  { icon: BookOpen, label: 'Программы', path: '/main/programs' },
+  { icon: FileCode2, label: 'Технологические задачи', path: '/main/tech-tasks' },
+  { icon: Calendar, label: 'Мероприятия', path: '/main/events' },
+  { icon: Building2, label: 'История бизнеса', path: '/main/entepreneurs' },
+  { icon: ShoppingBag, label: 'Маркетплейс', path: '/main/marketplace' },
+  { icon: Plane, label: 'Удаленная работа', path: '/main/relocation', },
+  { icon: BarChart3, label: 'Аналитика', path: '/main/analytics' },
+  { icon: BotIcon, label: 'Чат-бот', path: '/main/chat' },
+  { icon: PackageOpen, label: 'Курсы', path: '/main/courses' },
 ];
 
 const footerLinks = [
-  { icon: Info, label: 'Об astana hub.com', path: '/about' },
+  { icon: Info, label: 'Об BizNest', path: '/about' },
   { icon: Mail, label: 'Связаться с нами', path: '/contact' },
   { icon: Instagram, label: 'Социальные сети', path: '/social' },
 ];

@@ -24,7 +24,7 @@ export default function MainFooter() {
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="footer-item">
-            <h3 className="text-xl font-bold mb-4">Tech Hub</h3>
+            <h3 className="text-xl font-bold mb-4">BizNest</h3>
             <p className="text-gray-400">
               Создаем будущее технологий вместе с вами
             </p>
@@ -62,7 +62,7 @@ export default function MainFooter() {
         <div className="border-t border-gray-800 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="footer-item text-gray-400">
-              © 2024 Tech Hub. Все права защищены.
+              © 2024 BizNest. Все права защищены.
             </div>
             <div className="footer-item flex space-x-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (

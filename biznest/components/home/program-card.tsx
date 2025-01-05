@@ -15,8 +15,8 @@ export default function ProgramCard({ program }: ProgramCardProps) {
     <Card className="overflow-hidden">
       <Image
         src={program.image}
-        width={200}
-        height={200}
+        width={500}
+        height={500}
         alt={program.title}
         className="w-full h-48 object-cover"
       />

@@ -49,7 +49,7 @@ export default function ChatPage() {
       <Card className="h-[calc(100vh-8rem)]">
         <div className="h-full flex flex-col">
           <div className="p-4 border-b">
-            <h1 className="text-xl font-semibold">Tech Hub Assistant</h1>
+            <h1 className="text-xl font-semibold">Biz Nest Помощник</h1>
             <p className="text-sm text-gray-500">Ask me anything about our programs and services</p>
           </div>
           

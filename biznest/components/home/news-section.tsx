@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Calendar } from 'lucide-react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import Image from 'next/image';
 
 const news = [
   {
@@ -46,7 +47,9 @@ export default function NewsSection() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {news.map((item, index) => (
           <Card key={index} className="news-card overflow-hidden hover:shadow-lg transition-shadow">
-            <img
+            <Image
+            width={500}
+            height={500}
               src={item.image}
               alt={item.title}
               className="w-full h-48 object-cover"
