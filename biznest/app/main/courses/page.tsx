@@ -59,7 +59,7 @@ export default function Courses() {
         <h2 className="text-3xl font-bold text-gray-900 mb-4">
           Образовательные курсы
         </h2>
-        <p className="text-xl text-gray-600">
+        <p className="text-xl text-gray-500">
           Развивайте профессиональные навыки с нашими курсами
         </p>
       </div>
