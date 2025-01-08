@@ -1,26 +1,32 @@
 'use client';
 
-import { useEffect } from 'react';
-import Link from 'next/link';
+import { useRef } from 'react';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+// Регистрируем плагин ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
 
 export default function MainFooter() {
-  useEffect(() => {
+  const footerRef = useRef<HTMLElement | null>(null);
+
+  useGSAP(() => {
     gsap.from('.footer-item', {
       y: 20,
       opacity: 0,
       duration: 0.5,
       stagger: 0.1,
       scrollTrigger: {
-        trigger: 'footer',
+        trigger: footerRef.current,
         start: 'top bottom',
       },
     });
-  }, []);
+  }, { scope: footerRef });
 
   return (
-    <footer className="bg-black border-t border-gray-800">
+    <footer ref={footerRef} className="bg-black border-t border-gray-800">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="footer-item">
@@ -62,7 +68,7 @@ export default function MainFooter() {
         <div className="border-t border-gray-800 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="footer-item text-gray-400">
-              © 2024 BizNest. Все права защищены.
+              © 2025 BizNest. Все права защищены.
             </div>
             <div className="footer-item flex space-x-4">
               {[Facebook, Twitter, Instagram, Linkedin].map((Icon, index) => (

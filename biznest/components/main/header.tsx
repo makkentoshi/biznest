@@ -1,37 +1,49 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { Menu, X } from 'lucide-react';
-import gsap from 'gsap';
+import { useState, useRef } from "react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Menu, X } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 export default function MainHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
 
-    window.addEventListener('scroll', handleScroll);
-    
-    gsap.from('.nav-item', {
-      y: -20,
-      opacity: 0,
-      duration: 0.5,
-      stagger: 0.1,
-      ease: 'power2.out',
-    });
+  const handleScroll = () => {
+    setIsScrolled(window.scrollY > 50);
+  };
 
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+
+  useGSAP(
+    () => {
+      gsap.from(".nav-item", {
+        y: -20,
+        opacity: 0,
+        duration: 0.5,
+        stagger: 0.1,
+        ease: "power2.out",
+      });
+
+      window.addEventListener("scroll", handleScroll);
+
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
+    },
+    { scope: headerRef }
+  );
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'bg-black/80 backdrop-blur-sm' : 'bg-transparent'
-    }`}>
+    <header
+      ref={headerRef}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-black/80 backdrop-blur-sm" : "bg-transparent"
+      }`}
+    >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link href="/main" className="nav-item">
@@ -39,7 +51,7 @@ export default function MainHeader() {
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
-            {['О нас', 'Услуги', 'Программы', 'Контакты'].map((item, index) => (
+            {["О нас", "Услуги", "Программы", "Контакты"].map((item, index) => (
               <a
                 key={index}
                 href="#"
@@ -49,7 +61,10 @@ export default function MainHeader() {
               </a>
             ))}
             <Link href="/home" className="nav-item">
-              <Button variant="outline" className="border-white text-black hover:bg-white hover:text-gray-700">
+              <Button
+                variant="outline"
+                className="border-white text-black hover:bg-white hover:text-gray-700"
+              >
                 Войти
               </Button>
             </Link>
@@ -68,7 +83,7 @@ export default function MainHeader() {
       {isMenuOpen && (
         <div className="md:hidden bg-black/95 backdrop-blur-sm">
           <nav className="container mx-auto px-4 py-6 space-y-4">
-            {['О нас', 'Услуги', 'Программы', 'Контакты'].map((item, index) => (
+            {["О нас", "Услуги", "Программы", "Контакты"].map((item, index) => (
               <a
                 key={index}
                 href="#"
@@ -78,7 +93,10 @@ export default function MainHeader() {
               </a>
             ))}
             <Link href="/home">
-              <Button variant="outline" className="w-full border-white text-white hover:bg-white hover:text-black">
+              <Button
+                variant="outline"
+                className="w-full border-white text-white hover:bg-white hover:text-black"
+              >
                 Войти
               </Button>
             </Link>
