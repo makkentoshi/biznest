@@ -7,9 +7,11 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import MainFooter from '@/components/main/footer';
-import MainHeader from '@/components/main/header';
+import MainFooter from '@/components/home-page/footer';
+import MainHeader from '@/components/home-page/header';
 import Image from 'next/image';
+import HomeHeader from '@/components/home-page/header';
+import HomeFooter from '@/components/home-page/footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,7 +67,7 @@ export default function MainPage() {
 
   return (
     <div className="min-h-screen bg-black text-white" ref={containerRef}>
-      <MainHeader />
+      <HomeHeader />
       
       <main>
         {/* Hero Section */}
@@ -89,7 +91,7 @@ export default function MainPage() {
               Biz Nest - это место, где технологии встречаются с возможностями. 
               Создавайте, развивайтесь и меняйте мир вместе с нами.
             </p>
-            <Link href="/main" className="hero-button inline-block">
+            <Link href="/survey" className="hero-button inline-block">
               <Button size="lg" className="bg-white text-black hover:bg-white/90 text-lg px-8 py-6">
                 Начать путешествие <ArrowRight className="ml-2" />
               </Button>
@@ -161,7 +163,7 @@ export default function MainPage() {
         </section>
       </main>
 
-      <MainFooter />
+      <HomeFooter />
     </div>
   );
 }

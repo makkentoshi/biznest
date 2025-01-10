@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from 'next/font/google';
+import { Inter } from "next/font/google";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Sidebar from "@/components/layout/Sidebar";
-import Header from "@/components/layout/Header";
+import { ClerkProvider } from "@clerk/nextjs";
+import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const inter = Inter({ subsets: ['latin', 'cyrillic'] });
+const inter = Inter({ subsets: ["latin", "cyrillic"] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -28,13 +28,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body className={inter.className}>
-            <div >
-              {children}
-            </div>
-         
-      </body>
-    </html>
+    <ClerkProvider
+      publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      appearance={{
+        layout: {
+          unsafe_disableDevelopmentModeWarnings: true,
+        },
+      }}
+    >
+      <html lang="ru">
+        <body className={inter.className}>
+          <div>{children}</div>
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

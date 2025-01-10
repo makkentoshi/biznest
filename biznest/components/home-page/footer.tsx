@@ -9,7 +9,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Регистрируем плагин ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
 
-export default function MainFooter() {
+export default function HomeFooter() {
   const footerRef = useRef<HTMLElement | null>(null);
 
   useGSAP(() => {

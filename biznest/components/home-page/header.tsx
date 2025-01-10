@@ -6,17 +6,16 @@ import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
-export default function MainHeader() {
+export default function HomeHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
 
-
   const handleScroll = () => {
     setIsScrolled(window.scrollY > 50);
   };
-
 
   useGSAP(
     () => {
@@ -60,14 +59,30 @@ export default function MainHeader() {
                 {item}
               </a>
             ))}
-            <Link href="/home" className="nav-item">
-              <Button
-                variant="outline"
-                className="border-white text-black hover:bg-white hover:text-gray-700"
-              >
-                Войти
-              </Button>
-            </Link>
+               <SignedOut>
+              <Link href="/sign-up" className="nav-item">
+                <Button
+                  variant="outline"
+                  className="border-white text-black hover:bg-white hover:text-gray-400"
+                >
+                  Зарегистрироваться
+                </Button>
+              </Link>
+            </SignedOut>
+            <SignedOut>
+              <Link href="/home" className="nav-item">
+                <Button
+                  variant="default"
+                  className="border-white text-white  hover:text-gray-300"
+                >
+                  Войти
+                </Button>
+              </Link>
+            </SignedOut>
+         
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </nav>
 
           <button
@@ -92,14 +107,19 @@ export default function MainHeader() {
                 {item}
               </a>
             ))}
-            <Link href="/home">
-              <Button
-                variant="outline"
-                className="w-full border-white text-white hover:bg-white hover:text-black"
-              >
-                Войти
-              </Button>
-            </Link>
+            <SignedOut>
+              <Link href="/home">
+                <Button
+                  variant="outline"
+                  className="w-full border-white text-white hover:bg-white hover:text-black"
+                >
+                  Войти
+                </Button>
+              </Link>
+            </SignedOut>
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </nav>
         </div>
       )}
