@@ -1,28 +1,31 @@
 import { NextResponse } from 'next/server';
-import { PrismaClient } from '@prisma/client';
 import { auth } from '@clerk/nextjs/server';
-
-const prisma = new PrismaClient();
+import connectToDatabase from '@/lib/mongodb';
 
 export async function POST(req: Request) {
-  const { userId } = auth(); // Получаем ID пользователя из Clerk
-  const { questionId, answers } = await req.json(); // Получаем данные из запроса
+  const { userId } = await auth(); // Получаем ID пользователя из Clerk
 
   if (!userId) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
-  try {
-    // Сохраняем ответы в базу данных
-    const response = await prisma.userResponse.create({
-      data: {
-        userId,
-        questionId,
-        answers: answers.join(', '), // Сохраняем ответы как строку
-      },
-    });
+  const { questionId, answers } = await req.json();
 
-    return NextResponse.json({ success: true, response });
+  const client = await connectToDatabase();
+  const db = client.db('mydb'); // Замените 'mydb' на имя вашей базы данных
+
+  try {
+    // Сохраняем каждый ответ в базу данных
+    for (const answer of answers) {
+      await db.collection('user_responses').insertOne({
+        clerkUserId: userId,
+        question: `Question ${questionId}`,
+        answer,
+        createdAt: new Date(),
+      });
+    }
+
+    return NextResponse.json({ success: true });
   } catch (error) {
     console.error(error);
     return NextResponse.json({ error: 'Failed to save response' }, { status: 500 });

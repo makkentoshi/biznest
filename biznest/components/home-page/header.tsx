@@ -46,7 +46,7 @@ export default function HomeHeader() {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           <Link href="/main" className="nav-item">
-            <span className="text-2xl font-bold">Biz Nest</span>
+            <span className="text-2xl font-bold">BizNest</span>
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">

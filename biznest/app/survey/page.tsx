@@ -5,27 +5,8 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
-import { PrismaClient } from "@prisma/client";
-import OpenAI from "openai";
 
-const prisma = new PrismaClient();
-
-const openai = new OpenAI({
-  baseURL: "https://api.deepseek.com",
-  apiKey: process.env.DEEPSEEK_KEY,
-});
-
-async function main() {
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "You are a helpful assistant." }],
-    model: "deepseek-chat",
-  });
-
-  console.log(completion.choices[0].message.content);
-}
-
-main();
-
+// Вопросы для опроса
 const questions = [
   {
     id: 1,
@@ -77,6 +58,32 @@ export default function SurveyPage() {
   const [answers, setAnswers] = useState<Record<number, string[]>>({});
   const [customAnswer, setCustomAnswer] = useState("");
 
+  // Функция для отправки ответов на сервер
+  const saveResponses = async (questionId: number, answers: string[]) => {
+    try {
+      const response = await fetch("/api/survey", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          questionId,
+          answers,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save response");
+      }
+
+      const data = await response.json();
+      console.log("Response saved:", data);
+    } catch (error) {
+      console.error("Error saving response:", error);
+    }
+  };
+
+  // Обработка выбора ответа
   const handleAnswer = async (option: string) => {
     const questionId = questions[currentQuestion].id;
     const currentAnswers = answers[questionId] || [];
@@ -93,29 +100,9 @@ export default function SurveyPage() {
     setAnswers({ ...answers, [questionId]: newAnswers });
 
     // Отправляем ответы на сервер
-    try {
-      const response = await fetch("/api/survey", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          questionId,
-          answers: newAnswers,
-        }),
-      });
+    await saveResponses(questionId, newAnswers);
 
-      if (!response.ok) {
-        throw new Error("Failed to save response");
-      }
-
-      const data = await response.json();
-      console.log("Response saved:", data);
-    } catch (error) {
-      console.error("Error saving response:", error);
-    }
-
-    // Переход к следующему вопросу
+    // Переход к следующему вопросу (если не разрешено множественное выделение)
     if (
       !questions[currentQuestion].allowMultiple &&
       currentQuestion < questions.length - 1
@@ -124,17 +111,22 @@ export default function SurveyPage() {
     }
   };
 
-  const handleCustomAnswer = () => {
+  // Обработка кастомного ответа
+  const handleCustomAnswer = async () => {
     if (customAnswer.trim()) {
       const questionId = questions[currentQuestion].id;
+      const newAnswers = [...(answers[questionId] || []), customAnswer.trim()];
+
       setAnswers({
         ...answers,
-        [questionId]: [...(answers[questionId] || []), customAnswer.trim()],
+        [questionId]: newAnswers,
       });
       setCustomAnswer("");
+
+      // Отправляем кастомный ответ на сервер
+      await saveResponses(questionId, newAnswers);
     }
   };
-
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <AnimatePresence mode="wait">

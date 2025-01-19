@@ -26,12 +26,12 @@ export default function HomeFooter() {
   }, { scope: footerRef });
 
   return (
-    <footer ref={footerRef} className="bg-black border-t border-gray-800">
+    <footer ref={footerRef} className="bg-black border-t border-gray-950 rounded-xl">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="footer-item">
             <h3 className="text-xl font-bold mb-4">BizNest</h3>
-            <p className="text-gray-400">
+            <p className="text-gray-200">
               Создаем будущее технологий вместе с вами
             </p>
           </div>
@@ -55,7 +55,7 @@ export default function HomeFooter() {
               <ul className="space-y-2">
                 {section.links.map((link, idx) => (
                   <li key={idx}>
-                    <a href="#" className="text-gray-400 hover:text-white transition-colors">
+                    <a href="#" className="text-gray-200 hover:text-white transition-colors">
                       {link}
                     </a>
                   </li>
@@ -65,9 +65,9 @@ export default function HomeFooter() {
           ))}
         </div>
 
-        <div className="border-t border-gray-800 pt-8 mt-8">
+        <div className="border-t border-gray-100 pt-8 mt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="footer-item text-gray-400">
+            <div className="footer-item text-gray-200">
               © 2025 BizNest. Все права защищены.
             </div>
             <div className="footer-item flex space-x-4">
@@ -75,7 +75,7 @@ export default function HomeFooter() {
                 <a
                   key={index}
                   href="#"
-                  className="text-gray-400 hover:text-white transition-colors"
+                  className="text-gray-200 hover:text-white transition-colors"
                 >
                   <Icon className="w-5 h-5" />
                 </a>
