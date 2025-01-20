@@ -8,7 +8,6 @@ import {
   CircleDollarSign,
   TrendingUp,
   TrendingDownIcon,
-  
 } from "lucide-react";
 import { UserButton } from "@clerk/nextjs";
 import { usePathname } from "next/navigation";
@@ -19,25 +18,25 @@ function SideNav() {
       id: 1,
       name: "Dashboard",
       icon: LayoutGrid,
-      path: "/dashboard",
+      path: "/biznest-ai/dashboard",
     },
     {
       id: 2,
       name: "Incomes",
       icon: CircleDollarSign,
-      path: "/dashboard/incomes",
+      path: "/biznest-ai/dashboard/incomes",
     },
     {
       id: 2,
       name: "Budgets",
       icon: PiggyBank,
-      path: "/dashboard/budgets",
+      path: "/biznest-ai/dashboard/budgets",
     },
     {
       id: 3,
       name: "Expenses",
       icon: ReceiptText,
-      path: "/dashboard/expenses",
+      path: "/biznest-ai/dashboard/expenses",
     },
     // {
     //   id: 2,
@@ -55,7 +54,7 @@ function SideNav() {
       id: 4,
       name: "Upgrade",
       icon: ShieldCheck,
-      path: "/dashboard/upgrade",
+      path: "/biznest-ai/dashboard/upgrade",
     },
   ];
   const path = usePathname();
@@ -71,7 +70,12 @@ function SideNav() {
         height={100}
         /> */}
       <div className="flex flex-row items-center">
-        <Image src={"./chart-donut.svg"} alt="logo" width={40} height={25} />
+        <Image
+          src={"../chart-donut.svg"}
+          alt="logo"
+          width={40}
+          height={25}
+        />
         <span className="text-blue-800 font-bold text-xl">FinanSmart</span>
       </div>
       <div className="mt-5">

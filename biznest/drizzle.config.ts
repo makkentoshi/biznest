@@ -1,10 +1,11 @@
-export default {
-    dialect: "postgresql",
-    schema: "./utils/schema.jsx",
-    out: "./drizzle",
-    dbCredentials: {
-      url: "postgresql://finan-smart_owner:uk3aed9QZotj@ep-wispy-breeze-a5iadk8t.us-east-2.aws.neon.tech/finan-smart?sslmode=require",
-      connectionString:
-        "postgresql://finan-smart_owner:uk3aed9QZotj@ep-wispy-breeze-a5iadk8t.us-east-2.aws.neon.tech/finan-smart?sslmode=require",
-    },
-  };
+import { config } from 'dotenv';
+import { defineConfig } from "drizzle-kit";
+config({ path: '.env' });
+export default defineConfig({
+  schema: "./src/schema.ts",
+  out: "./migrations",
+  dialect: "postgresql",
+  dbCredentials: {
+    url: process.env.DATABASE_URL!,
+  },
+});
