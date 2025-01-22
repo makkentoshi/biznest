@@ -51,7 +51,7 @@ function EditBudget({ budgetInfo, refreshData }: EditBudgetProps) {
 
       if (result) {
         refreshData();
-        toast("Budget Updated!");
+        toast("Бюджет обновлён!");
       }
     } catch (error) {
       console.error("Error updating budget:", error);
@@ -64,12 +64,12 @@ function EditBudget({ budgetInfo, refreshData }: EditBudgetProps) {
       <Dialog>
         <DialogTrigger asChild>
           <Button className="flex space-x-2 gap-2 rounded-full">
-            <PenBox className="w-4" /> Edit
+            <PenBox className="w-4" /> Редактировать
           </Button>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Update Budget</DialogTitle>
+            <DialogTitle>Обновить бюджет</DialogTitle>
             <DialogDescription>
               <div className="mt-5">
                 <Button
@@ -89,19 +89,19 @@ function EditBudget({ budgetInfo, refreshData }: EditBudgetProps) {
                   />
                 </div>
                 <div className="mt-2">
-                  <h2 className="text-black font-medium my-1">Budget Name</h2>
+                  <h2 className="text-black font-medium my-1">Название бюджета</h2>
                   <Input
-                    placeholder="e.g. Home Decor"
+                    placeholder="Например Спальный гарнитур"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="mt-2">
-                  <h2 className="text-black font-medium my-1">Budget Amount</h2>
+                  <h2 className="text-black font-medium my-1">Сумма в ₸</h2>
                   <Input
                     type="number"
                     value={amount}
-                    placeholder="e.g. 5000$"
+                    placeholder="Например 5000₸"
                     onChange={(e) => setAmount(e.target.value)}
                   />
                 </div>
@@ -115,7 +115,7 @@ function EditBudget({ budgetInfo, refreshData }: EditBudgetProps) {
                 onClick={onUpdateBudget}
                 className="mt-5 w-full rounded-full"
               >
-                Update Budget
+                Обновить бюджет
               </Button>
             </DialogClose>
           </DialogFooter>

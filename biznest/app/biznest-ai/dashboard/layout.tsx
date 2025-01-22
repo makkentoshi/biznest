@@ -19,7 +19,7 @@ function DashboardLayout({ children }) {
     const result = await db
       .select()
       .from(Budgets)
-      .where(eq(Budgets.createdBy, user?.primaryEmailAddress?.emailAddress));
+      .where(eq(Budgets.createdby, user?.primaryEmailAddress?.emailAddress));
     console.log(result);
     if (result?.length == 0) {
       router.replace("/biznest-ai/dashboard/budgets");

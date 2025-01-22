@@ -16,25 +16,25 @@ function SideNav() {
   const menuList = [
     {
       id: 1,
-      name: "Dashboard",
+      name: "Панель",
       icon: LayoutGrid,
       path: "/biznest-ai/dashboard",
     },
     {
       id: 2,
-      name: "Incomes",
+      name: "Доходы",
       icon: CircleDollarSign,
       path: "/biznest-ai/dashboard/incomes",
     },
     {
       id: 2,
-      name: "Budgets",
+      name: "Бюджеты",
       icon: PiggyBank,
       path: "/biznest-ai/dashboard/budgets",
     },
     {
       id: 3,
-      name: "Expenses",
+      name: "Затраты",
       icon: ReceiptText,
       path: "/biznest-ai/dashboard/expenses",
     },
@@ -52,7 +52,7 @@ function SideNav() {
     // },
     {
       id: 4,
-      name: "Upgrade",
+      name: "Платная подписка",
       icon: ShieldCheck,
       path: "/biznest-ai/dashboard/upgrade",
     },
@@ -63,32 +63,18 @@ function SideNav() {
     console.log(path);
   }, [path]);
   return (
-    <div className="h-screen p-5 border shadow-sm">
-      {/* <Image src={'/logo.svg'}
-        alt='logo'
-        width={160}
-        height={100}
-        /> */}
+    <div className="fixed top-0 left-0 h-screen w-64 p-5 border-r shadow-sm bg-white z-50">
       <div className="flex flex-row items-center">
-        <Image
-          src={"../chart-donut.svg"}
-          alt="logo"
-          width={40}
-          height={25}
-        />
-        <span className="text-blue-800 font-bold text-xl">FinanSmart</span>
+        <Image src={"../chart-donut.svg"} alt="logo" width={40} height={25} />
+        <span className="text-indigo-950 font-bold text-xl ml-2">BizNest Finance</span>
       </div>
       <div className="mt-5">
         {menuList.map((menu, index) => (
           <Link href={menu.path} key={index}>
             <h2
-              className={`flex gap-2 items-center
-                    text-gray-500 font-medium
-                    mb-2
-                    p-4 cursor-pointer rounded-full
-                    hover:text-primary hover:bg-blue-100
-                    ${path == menu.path && "text-primary bg-blue-100"}
-                    `}
+              className={`flex gap-2 items-center text-gray-500 font-medium mb-2 p-4 cursor-pointer rounded-full hover:text-primary hover:bg-blue-100 ${
+                path === menu.path ? "text-primary bg-blue-100" : ""
+              }`}
             >
               <menu.icon />
               {menu.name}
@@ -96,12 +82,9 @@ function SideNav() {
           </Link>
         ))}
       </div>
-      <div
-        className="fixed bottom-10 p-5 flex gap-2
-            items-center"
-      >
+      <div className="fixed bottom-10 p-5 flex gap-2 items-center">
         <UserButton />
-        Profile
+        <span>Профиль</span>
       </div>
     </div>
   );

@@ -4,7 +4,7 @@ export interface Budget {
     name: string;
     amount: string;
     icon?: string;
-    createdBy: string;
+    createdby: string;
   }
   
   export interface Income {
@@ -12,31 +12,29 @@ export interface Budget {
     name: string;
     amount: string;
     icon?: string;
-    createdBy: string;
-  }
-  
-  export interface Expense {
-    id: number;     
-    name: string;    
-    amount: string;  
-    budgetId: number; 
-    createdAt: string; 
+    createdby: string;
   }
   
   export interface AddExpenseProps {
-    budgetId: number;
-    user: {
-      primaryEmailAddress?: {
-        emailAddress: string;
-      };
+    expenseInfo: {
+      name: string;
+      amount: string;
+      budgetid: number; // Связь с бюджетом
     };
+    user: any; // Можем использовать типизацию для пользователя, например, от вашего контекста
     refreshData: () => void;
+  }
+
+  export interface ExpenseItemProps {
+    expense: {
+      id: number;
+      description: string;
+      amount: number;
+      date: string;
+      budgetid: number; // Для связи с бюджетом
+    };
   }
   
-  export interface ExpenseListTableProps {
-    expensesList: Expense[];
-    refreshData: () => void;
-  }
 
   export interface EditBudgetProps {
     budgetInfo: {

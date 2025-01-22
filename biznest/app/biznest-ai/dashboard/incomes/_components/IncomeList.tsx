@@ -22,8 +22,8 @@ function IncomeList() {
         totalItem: sql`count(${Expenses.id})`.mapWith(Number),
       })
       .from(Incomes)
-      .leftJoin(Expenses, eq(Incomes.id, Expenses.budgetId))
-      .where(eq(Incomes.createdBy, user?.primaryEmailAddress?.emailAddress))
+      .leftJoin(Expenses, eq(Incomes.id, Expenses.budgetid))
+      .where(eq(Incomes.createdby, user?.primaryEmailAddress?.emailAddress))
       .groupBy(Incomes.id)
       .orderBy(desc(Incomes.id));
     setIncomelist(result);

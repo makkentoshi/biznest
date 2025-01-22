@@ -4,11 +4,11 @@ export async function POST(request: Request) {
   const { totalBudget, totalIncome, totalSpend } = await request.json();
 
   const userPrompt = `
-    Based on the following financial data:
-    - Total Budget: ${totalBudget} TENGE 
-    - Expenses: ${totalSpend} TENGE 
-    - Incomes: ${totalIncome} TENGE
-    Provide detailed financial advice in 2 sentences to help the user manage their finances more effectively.
+    На основе следующих финансовых данных:
+    - Общий бюджет: ${totalBudget} TENGE 
+    - Расходы: ${totalSpend} TENGE 
+    - Доходы: ${totalIncome} TENGE
+    Дайте подробный финансовый совет в 2 предложениях, чтобы помочь пользователю более эффективно управлять своими финансами.
   `;
 
   try {

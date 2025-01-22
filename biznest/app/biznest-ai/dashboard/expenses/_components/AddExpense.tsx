@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { db } from "@/utils/dbConfig";
@@ -6,36 +7,42 @@ import { Loader } from "lucide-react";
 import moment from "moment";
 import React, { useState } from "react";
 import { toast } from "sonner";
-import { AddExpenseProps } from "@/lib/types";
 
-function AddExpense({ budgetId, user, refreshData }: AddExpenseProps) {
-  const [name, setName] = useState<string>("");
-  const [amount, setAmount] = useState<string>("");
-  const [loading, setLoading] = useState<boolean>(false);
+function AddExpense({ budgetid, user, refreshData }) {
+  const [name, setName] = useState(""); // Управление названием
+  const [amount, setAmount] = useState(""); // Управление суммой
+  const [loading, setLoading] = useState(false); // Состояние загрузки
 
   const addNewExpense = async () => {
+    // Проверка введенных данных
+    if (!name || !amount || isNaN(Number(amount))) {
+      toast("Ошибка: убедитесь, что все поля заполнены корректно.");
+      return;
+    }
+
     setLoading(true);
 
     try {
+      // Вставка новой траты в базу данных
       const result = await db
         .insert(Expenses)
         .values({
-          name: name, // строка (соответствует схеме)
-          amount: parseFloat(amount).toString(), // преобразуем в строку
-          budgetId: budgetId, // число (соответствует схеме)
-          createdAt: moment().format("DD/MM/yyyy"), // строка (соответствует схеме)
+          name: name,
+          amount: parseFloat(amount).toString(),
+          budgetid: budgetid,
+          createdat: moment().format("DD/MM/yyyy"),
         })
         .returning();
 
       if (result) {
-        setAmount("");
-        setName("");
-        refreshData();
-        toast("New Expense Added!");
+        refreshData(); // Обновляем данные
+        toast("Новые траты добавлены!");
+        setName(""); // Очищаем поле названия
+        setAmount(""); // Очищаем поле суммы
       }
     } catch (error) {
-      console.error("Error adding expense:", error);
-      toast("Failed to add expense.");
+      console.error("Ошибка добавления:", error);
+      toast("Не удалось добавить траты.");
     } finally {
       setLoading(false);
     }
@@ -43,19 +50,19 @@ function AddExpense({ budgetId, user, refreshData }: AddExpenseProps) {
 
   return (
     <div className="border p-5 rounded-2xl">
-      <h2 className="font-bold text-lg">Add Expense</h2>
+      <h2 className="font-bold text-lg">Добавить траты</h2>
       <div className="mt-2">
-        <h2 className="text-black font-medium my-1">Expense Name</h2>
+        <h2 className="text-black font-medium my-1">Название</h2>
         <Input
-          placeholder="e.g. Bedroom Decor"
+          placeholder="Например Спальный гарнитур"
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
       </div>
       <div className="mt-2">
-        <h2 className="text-black font-medium my-1">Expense Amount</h2>
+        <h2 className="text-black font-medium my-1">Сумма ₸</h2>
         <Input
-          placeholder="e.g. 1000"
+          placeholder="Например 10000₸"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
         />

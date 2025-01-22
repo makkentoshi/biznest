@@ -31,19 +31,29 @@ function CreateBudget({ refreshData }) {
    * Used to Create New Budget
    */
   const onCreateBudget = async () => {
-    const result = await db
-      .insert(Budgets)
-      .values({
-        name: name,
-        amount: amount,
-        createdBy: user?.primaryEmailAddress?.emailAddress,
-        icon: emojiIcon,
-      })
-      .returning({ insertedId: Budgets.id });
+    if (!user?.primaryEmailAddress?.emailAddress) {
+      toast("User email is not available. Please log in again.");
+      return;
+    }
 
-    if (result) {
-      refreshData();
-      toast("New Budget Created!");
+    try {
+      const result = await db
+        .insert(Budgets)
+        .values({
+          name: name,
+          amount: amount,
+          createdby: user.primaryEmailAddress.emailAddress, // Убедитесь, что значение передаётся
+          icon: emojiIcon,
+        })
+        .returning({ insertedId: Budgets.id });
+
+      if (result) {
+        refreshData();
+        toast("New Budget Created!");
+      }
+    } catch (error) {
+      console.error("Error creating budget:", error);
+      toast("Failed to create budget. Please try again.");
     }
   };
   return (
@@ -56,12 +66,12 @@ function CreateBudget({ refreshData }) {
             cursor-pointer hover:shadow-md"
           >
             <h2 className="text-3xl">+</h2>
-            <h2>Create New Budget</h2>
+            <h2>Создать Новый Бюджет</h2>
           </div>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Create New Budget</DialogTitle>
+            <DialogTitle>Создать Новый Бюджет</DialogTitle>
             <DialogDescription>
               <div className="mt-5">
                 <Button
@@ -81,17 +91,19 @@ function CreateBudget({ refreshData }) {
                   />
                 </div>
                 <div className="mt-2">
-                  <h2 className="text-black font-medium my-1">Budget Name</h2>
+                  <h2 className="text-black font-medium my-1">
+                    Название Бюджета
+                  </h2>
                   <Input
-                    placeholder="e.g. Home Decor"
+                    placeholder="Например Спальный гарнитур"
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="mt-2">
-                  <h2 className="text-black font-medium my-1">Budget Amount</h2>
+                  <h2 className="text-black font-medium my-1">Сумма Бюджета</h2>
                   <Input
                     type="number"
-                    placeholder="e.g. 5000$"
+                    placeholder="Например 5000₸"
                     onChange={(e) => setAmount(e.target.value)}
                   />
                 </div>
@@ -105,7 +117,7 @@ function CreateBudget({ refreshData }) {
                 onClick={() => onCreateBudget()}
                 className="mt-5 w-full rounded-full"
               >
-                Create Budget
+                Создать Бюджет
               </Button>
             </DialogClose>
           </DialogFooter>

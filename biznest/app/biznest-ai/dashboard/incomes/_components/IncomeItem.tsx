@@ -22,10 +22,10 @@ function IncomeItem({ budget }) {
           </h2>
           <div>
             <h2 className="font-bold">{budget.name}</h2>
-            <h2 className="text-sm text-gray-500">{budget.totalItem} Item</h2>
+            <h2 className="text-sm text-gray-500">{budget.totalItem} Доход</h2>
           </div>
         </div>
-        <h2 className="font-bold text-primary text-lg"> ${budget.amount}</h2>
+        <h2 className="font-bold text-primary text-lg"> ₸{budget.amount}</h2>
       </div>
     </div>
   );

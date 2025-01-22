@@ -36,7 +36,7 @@ function CreateIncomes({ refreshData }) {
       .values({
         name: name,
         amount: amount,
-        createdBy: user?.primaryEmailAddress?.emailAddress,
+        createdby: user?.primaryEmailAddress?.emailAddress,
         icon: emojiIcon,
       })
       .returning({ insertedId: Incomes.id });
@@ -56,12 +56,12 @@ function CreateIncomes({ refreshData }) {
             cursor-pointer hover:shadow-md"
           >
             <h2 className="text-3xl">+</h2>
-            <h2>Create New Income Source</h2>
+            <h2>Создать новый источник дохода</h2>
           </div>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Create New Income Source</DialogTitle>
+            <DialogTitle>Создать новый источник дохода</DialogTitle>
             <DialogDescription>
               <div className="mt-5">
                 <Button
@@ -81,17 +81,17 @@ function CreateIncomes({ refreshData }) {
                   />
                 </div>
                 <div className="mt-2">
-                  <h2 className="text-black font-medium my-1">Source Name</h2>
+                  <h2 className="text-black font-medium my-1">Название источника</h2>
                   <Input
-                    placeholder="e.g. Youtube"
+                    placeholder="Например Instagram-аккаунт"
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
                 <div className="mt-2">
-                  <h2 className="text-black font-medium my-1">Montly Amount</h2>
+                  <h2 className="text-black font-medium my-1">Месячная сумма</h2>
                   <Input
                     type="number"
-                    placeholder="e.g. 5000$"
+                    placeholder="Например 5000₸"
                     onChange={(e) => setAmount(e.target.value)}
                   />
                 </div>
@@ -105,7 +105,7 @@ function CreateIncomes({ refreshData }) {
                 onClick={() => onCreateIncomes()}
                 className="mt-5 w-full rounded-full"
               >
-                Create Income Source
+                Создать название источника
               </Button>
             </DialogClose>
           </DialogFooter>

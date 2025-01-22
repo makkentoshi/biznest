@@ -82,7 +82,7 @@ function CardInfo({ budgetList, incomeList }: CardInfoProps) {
           <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             <div className="p-7 border rounded-2xl flex items-center justify-between">
               <div>
-                <h2 className="text-sm">Total Budget</h2>
+                <h2 className="text-sm">Полный бюджет</h2>
                 <h2 className="font-bold text-2xl">
                 ₸{formatNumber(totalBudget)}
                 </h2>
@@ -91,7 +91,7 @@ function CardInfo({ budgetList, incomeList }: CardInfoProps) {
             </div>
             <div className="p-7 border rounded-2xl flex items-center justify-between">
               <div>
-                <h2 className="text-sm">Total Spend</h2>
+                <h2 className="text-sm">В общем потрачено</h2>
                 <h2 className="font-bold text-2xl">
                 ₸{formatNumber(totalSpend)}
                 </h2>
@@ -100,14 +100,14 @@ function CardInfo({ budgetList, incomeList }: CardInfoProps) {
             </div>
             <div className="p-7 border rounded-2xl flex items-center justify-between">
               <div>
-                <h2 className="text-sm">No. Of Budget</h2>
+                <h2 className="text-sm">Количество Бюджетов</h2>
                 <h2 className="font-bold text-2xl">{budgetList?.length}</h2>
               </div>
               <Wallet className="bg-blue-800 p-3 h-12 w-12 rounded-full text-white" />
             </div>
             <div className="p-7 border rounded-2xl flex items-center justify-between">
               <div>
-                <h2 className="text-sm">Sum of Income Streams</h2>
+                <h2 className="text-sm">Сумма доходов</h2>
                 <h2 className="font-bold text-2xl">
                 ₸{formatNumber(totalIncome)}
                 </h2>

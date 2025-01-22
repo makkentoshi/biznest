@@ -30,7 +30,7 @@ export default function HomeFooter() {
       <div className="container mx-auto px-4 py-2">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="footer-item">
-            <h3 className="text-xl font-bold mb-4">BizNest</h3>
+            <h3 className="text-xl font-bold text-white mb-4">BizNest</h3>
             <p className="text-white">
               Создаем будущее технологий вместе с вами
             </p>
