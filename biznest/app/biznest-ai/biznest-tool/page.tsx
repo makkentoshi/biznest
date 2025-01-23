@@ -17,7 +17,7 @@ export default function BiznestToolPage() {
   // Загрузка данных бота при открытии страницы
   useEffect(() => {
     const fetchBotData = async () => {
-      const response = await fetch("/api/get-bot");
+      const response = await fetch("/api/get-tg-bot");
       const data = await response.json();
 
       if (data.success) {
