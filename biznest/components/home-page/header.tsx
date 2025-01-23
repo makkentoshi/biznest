@@ -45,21 +45,26 @@ export default function HomeHeader() {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <Link href="/main" className="nav-item">
+          <Link href="/" className="nav-item">
             <span className="text-2xl font-bold">BizNest</span>
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
-            {["О нас", "Услуги", "Программы", "Контакты"].map((item, index) => (
-              <a
+            {[
+              { label: "Biznest Tool", href: "/biznest-ai/biznest-tool" },
+              { label: "Biznest-AI", href: "/biznest-ai" },
+              { label: "AI Помощник", href: "/biznest-ai/chat" },
+              { label: "Новости", href: "/main/news" },
+            ].map((item, index) => (
+              <Link
                 key={index}
-                href="#"
-                className="nav-item text-sm hover:text-blue-400 transition-colors"
+                href={item.href}
+                className="nav-item text-sm hover:text-gray-300 transition-colors text-white"
               >
-                {item}
-              </a>
+                {item.label}
+              </Link>
             ))}
-               <SignedOut>
+            <SignedOut>
               <Link href="/sign-up" className="nav-item">
                 <Button
                   variant="outline"
@@ -79,7 +84,7 @@ export default function HomeHeader() {
                 </Button>
               </Link>
             </SignedOut>
-         
+
             <SignedIn>
               <UserButton />
             </SignedIn>

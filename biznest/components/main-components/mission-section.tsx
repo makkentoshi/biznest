@@ -23,26 +23,26 @@ export default function MissionSection() {
     <section className="py-12 bg-gray-50" ref={containerRef}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="text-center mb-12 mission-item">
-          <h2 className="text-3xl font-bold mb-4">Empowering Innovation in Kazakhstan</h2>
-          <p className="text-xl text-gray-600">Building the future of technology through collaboration and innovation</p>
+          <h2 className="text-3xl font-bold mb-4">Развитие инноваций в Казахстане</h2>
+          <p className="text-xl text-gray-600">Строим будущее технологий через сотрудничество и инновации</p>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8 mb-12">
           {[
             {
               icon: Rocket,
-              title: 'Innovation Hub',
-              description: 'Access cutting-edge technology and expertise',
+              title: 'Центр инноваций',
+              description: 'Доступ к передовым технологиям и экспертизе',
             },
             {
               icon: Target,
-              title: 'Startup Support',
-              description: 'Comprehensive resources for startup growth',
+              title: 'Поддержка стартапов',
+              description: 'Комплексные ресурсы для роста стартапов',
             },
             {
               icon: Users,
-              title: 'Community',
-              description: 'Connect with industry leaders and peers',
+              title: 'Сообщество',
+              description: 'Общайтесь с лидерами отрасли и единомышленниками',
             },
           ].map((item, index) => (
             <div key={index} className="text-center p-6 bg-white rounded-lg shadow-sm mission-item">
@@ -55,7 +55,7 @@ export default function MissionSection() {
 
         <div className="text-center mission-item">
           <Button size="lg" className="bg-blue-600 hover:bg-blue-700">
-            Start Your Journey
+            Начните свой путь
           </Button>
         </div>
       </div>

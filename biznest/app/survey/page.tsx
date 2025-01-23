@@ -5,55 +5,69 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { motion, AnimatePresence } from "framer-motion";
+import { useRouter } from "next/navigation"; // Импортируем useRouter
 
 // Вопросы для опроса
 const questions = [
   {
     id: 1,
-    question: "What is your primary interest in technology?",
-    options: ["AI/ML", "Web Development", "Mobile Apps", "Blockchain", "Other"],
+    question: "Каков ваш основной интерес в технологиях?",
+    options: [
+      "ИИ/Машинное обучение",
+      "Веб-разработка",
+      "Мобильные приложения",
+      "Блокчейн",
+      "Другое",
+    ],
     allowMultiple: true,
     allowCustom: true,
   },
   {
     id: 2,
-    question: "What stage is your startup in?",
-    options: ["Idea", "MVP", "Early Growth", "Scaling", "Not a startup"],
+    question: "На каком этапе находится ваш стартап?",
+    options: [
+      "Идея",
+      "MVP (Минимально жизнеспособный продукт)",
+      "Ранний рост",
+      "Масштабирование",
+      "Не стартап",
+    ],
     allowMultiple: false,
   },
   {
     id: 3,
-    question: "What resources do you need most?",
+    question: "Какие ресурсы вам нужны больше всего?",
     options: [
-      "Funding",
-      "Mentorship",
-      "Technical Support",
-      "Office Space",
-      "Networking",
+      "Финансирование",
+      "Наставничество",
+      "Техническая поддержка",
+      "Офисное пространство",
+      "Нетворкинг",
     ],
     allowMultiple: true,
   },
   {
     id: 4,
-    question: "Your preferred way of learning?",
+    question: "Какой ваш предпочтительный способ обучения?",
     options: [
-      "Online Courses",
-      "Workshops",
-      "One-on-One Mentoring",
-      "Books",
-      "Practice",
+      "Онлайн-курсы",
+      "Воркшопы",
+      "Индивидуальное наставничество",
+      "Книги",
+      "Практика",
     ],
     allowMultiple: true,
   },
   {
     id: 5,
-    question: "What is your experience level?",
-    options: ["Beginner", "Intermediate", "Advanced", "Expert"],
+    question: "Какой у вас уровень опыта?",
+    options: ["Новичок", "Средний", "Продвинутый", "Эксперт"],
     allowMultiple: false,
   },
 ];
 
 export default function SurveyPage() {
+  const router = useRouter(); // Используем useRouter для редиректа
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string[]>>({});
   const [customAnswer, setCustomAnswer] = useState("");
@@ -109,6 +123,11 @@ export default function SurveyPage() {
     ) {
       setTimeout(() => setCurrentQuestion(currentQuestion + 1), 500);
     }
+
+    // Если это последний вопрос, выполняем редирект
+    if (currentQuestion === questions.length - 1) {
+      router.push("/main"); // Редирект на страницу /main
+    }
   };
 
   // Обработка кастомного ответа
@@ -125,8 +144,14 @@ export default function SurveyPage() {
 
       // Отправляем кастомный ответ на сервер
       await saveResponses(questionId, newAnswers);
+
+      // Если это последний вопрос, выполняем редирект
+      if (currentQuestion === questions.length - 1) {
+        router.push("/main"); // Редирект на страницу /main
+      }
     }
   };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       <AnimatePresence mode="wait">
@@ -141,11 +166,11 @@ export default function SurveyPage() {
             <div className="mb-8">
               <div className="flex justify-between text-sm text-gray-500 mb-2">
                 <span>
-                  Question {currentQuestion + 1} of {questions.length}
+                  Вопрос {currentQuestion + 1} из {questions.length}
                 </span>
                 <span>
-                  {Math.round(((currentQuestion + 1) / questions.length) * 100)}
-                  % completed
+                  {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
+                  завершено
                 </span>
               </div>
               <div className="w-full bg-gray-200 h-1 rounded-full">
@@ -183,14 +208,14 @@ export default function SurveyPage() {
               {questions[currentQuestion].allowCustom && (
                 <div className="flex gap-2 mt-4">
                   <Input
-                    placeholder="Other (please specify)"
+                    placeholder="Другое (укажите)"
                     value={customAnswer}
                     onChange={(e) => setCustomAnswer(e.target.value)}
                     onKeyPress={(e) =>
                       e.key === "Enter" && handleCustomAnswer()
                     }
                   />
-                  <Button onClick={handleCustomAnswer}>Add</Button>
+                  <Button onClick={handleCustomAnswer}>Добавить</Button>
                 </div>
               )}
             </div>
@@ -203,7 +228,7 @@ export default function SurveyPage() {
                 }
                 disabled={currentQuestion === 0}
               >
-                Previous
+                Назад
               </Button>
               <Button
                 onClick={() =>
@@ -213,7 +238,7 @@ export default function SurveyPage() {
                 }
                 disabled={currentQuestion === questions.length - 1}
               >
-                Next
+                Далее
               </Button>
             </div>
           </Card>

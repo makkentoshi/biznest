@@ -2,10 +2,12 @@ import { Bot, Search, Keyboard } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import HomeHeader from "@/components/biznest-ai-page/header";
 
 export default function HeroPage() {
   return (
     <div className="min-h-screen bg-white">
+      <HomeHeader></HomeHeader>
       {/* Основной контент */}
       <main className="pt-20">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
@@ -65,54 +67,49 @@ export default function HeroPage() {
       <div className="min-h-[calc(100vh-4rem)] flex flex-col">
         <section className="flex-1 flex flex-col items-center justify-center px-4 py-20 text-center">
           <h1 className="text-5xl font-bold tracking-tight mb-6">
-            The minimalistic,
+            Минималистичный,
             <br />
-            AI-powered assistant.
+            AI-ассистент.
           </h1>
           <p className="text-lg text-muted-foreground mb-8 max-w-2xl">
-            Our AI assistant is a minimalistic, powerful tool that empowers you
-            to get answers with ease.
+            Наш AI-ассистент — это минималистичный и мощный инструмент, который
+            помогает вам легко получать ответы.
           </p>
           <div className="flex items-center gap-4">
             <Link href="/chat">
-              <Button size="lg">Get Started</Button>
+              <Button size="lg">Начать</Button>
             </Link>
             <Link href="/dashboard">
               <Button variant="outline" size="lg">
-                Learn More
+                Узнать больше
               </Button>
             </Link>
           </div>
 
           <div className="mt-20">
-            <h2 className="text-2xl font-semibold mb-10">
-              Experience the power of:
-            </h2>
+            <h2 className="text-2xl font-semibold mb-10">Ощутите мощь:</h2>
             <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
               <div className="p-6 rounded-lg border bg-card">
                 <Bot className="w-10 h-10 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">
-                  AI-driven Responses
-                </h3>
+                <h3 className="text-xl font-semibold mb-2">AI-ответы</h3>
                 <p className="text-muted-foreground">
-                  Get intelligent answers powered by our advanced AI system.
+                  Получайте интеллектуальные ответы благодаря нашей продвинутой
+                  AI-системе.
                 </p>
               </div>
               <div className="p-6 rounded-lg border bg-card">
                 <Search className="w-10 h-10 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">Smart Search</h3>
+                <h3 className="text-xl font-semibold mb-2">Умный поиск</h3>
                 <p className="text-muted-foreground">
-                  Quickly find previous conversations with powerful search
-                  functionality.
+                  Быстро находите предыдущие диалоги с помощью мощной функции
+                  поиска.
                 </p>
               </div>
               <div className="p-6 rounded-lg border bg-card">
                 <Keyboard className="w-10 h-10 mb-4" />
-                <h3 className="text-xl font-semibold mb-2">
-                  Keyboard Shortcuts
-                </h3>
+                <h3 className="text-xl font-semibold mb-2">Горячие клавиши</h3>
                 <p className="text-muted-foreground">
-                  Navigate efficiently with intuitive keyboard shortcuts.
+                  Эффективно управляйте с помощью интуитивных горячих клавиш.
                 </p>
               </div>
             </div>

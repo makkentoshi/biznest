@@ -17,6 +17,7 @@
     "@radix-ui/react-dialog": "^1.1.4",
     "@radix-ui/react-scroll-area": "^1.2.2",
     "@radix-ui/react-slot": "^1.1.1",
+    "@radix-ui/react-switch": "^1.1.2",
     "@radix-ui/react-toast": "^1.2.3",
     "axios": "^1.7.9",
     "class-variance-authority": "^0.7.1",
@@ -42,7 +43,8 @@
     "sonner": "^1.7.2",
     "swr": "^2.3.0",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "telegram": "^2.26.16"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

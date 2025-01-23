@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Send, Bot, User, Loader2, Copy, Plus } from "lucide-react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import ChatHeader from "./_components/ChatHeader";
 
 interface Chat {
   _id: string; // Уникальный идентификатор
@@ -39,6 +40,11 @@ export default function ChatPage() {
     },
     { scope: chatRef }
   );
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
 
   // Загрузка истории чатов
   //   useEffect(() => {
@@ -183,6 +189,8 @@ export default function ChatPage() {
 
   return (
     <div className="flex h-screen mt-[5rem]" ref={chatRef}>
+      <ChatHeader></ChatHeader>
+
       {/* Боковая панель */}
       <div className="w-64 bg-gray-50 border-r p-4">
         <Button onClick={handleNewChat} className="w-full mb-4">
@@ -228,7 +236,7 @@ export default function ChatPage() {
       </div>
 
       {/* Основной чат */}
-      <div className="flex-1 flex flex-col ">
+      <div className="flex-1 flex flex-col">
         <Card className="flex-1 flex flex-col">
           {/* Заголовок чата */}
           <div className="p-4 border-b">
@@ -239,7 +247,10 @@ export default function ChatPage() {
           </div>
 
           {/* Блок сообщений */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          <div
+            className="flex-1 overflow-y-auto p-4 space-y-4"
+            style={{ maxHeight: "calc(100vh - 20rem)" }}
+          >
             {messages.map((message, index) => (
               <div
                 key={index}
@@ -284,13 +295,13 @@ export default function ChatPage() {
                 <div>
                   <h3 className="font-semibold mb-2">Premium План</h3>
                   <p className="text-sm text-white mb-3">
-                  Задавайте столько вопросов, сколько хотите c подпиской
+                    Задавайте столько вопросов, сколько хотите c подпиской
                   </p>
                   <Button
                     variant="outline"
                     className="w-full text-black border-white hover:bg-white/90"
                   >
-                   Управление Подпиской
+                    Управление Подпиской
                   </Button>
                 </div>
               </div>

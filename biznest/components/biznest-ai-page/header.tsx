@@ -45,15 +45,16 @@ export default function HomeHeader() {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <Link href="/biznest-ai" className="nav-item">
+          <Link href="/" className="nav-item">
             <span className="text-2xl font-bold text-white">BizNest</span>
           </Link>
 
           <nav className="hidden md:flex items-center space-x-8">
             {[
-              { label: "О нас", href: "/about" },
-              { label: "Новости", href: "/main" }, 
-              { label: "Контакты", href: "/contacts" },
+              { label: "Biznest Tool", href: "/biznest-ai/biznest-tool" },
+              { label: "Biznest-AI", href: "/biznest-ai" },
+              { label: "AI Помощник", href: "/biznest-ai/chat" },
+              { label: "Новости", href: "/main/news" },
             ].map((item, index) => (
               <Link
                 key={index}
