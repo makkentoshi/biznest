@@ -51,10 +51,12 @@ export default function DashboardHeader() {
 
           <nav className="hidden md:flex items-center space-x-8">
             {[
-              { label: "Biznest Tool", href: "/biznest-ai/biznest-tool" },
-               { label: "Biznest-AI", href: "/biznest-ai" },
-              { label: "AI Помощник", href: "/biznest-ai/chat" },
-              { label: "Новости", href: "/main/news" },
+          { label: "Biznest-AI", href: "/biznest-ai" },
+          { label: "Biznest Tool", href: "/biznest-ai/biznest-tool" },
+          { label: "Biznest Finance", href: "/biznest-ai/dashboard" },
+          { label: "AI Помощник", href: "/biznest-ai/chat" },
+          { label: "Новости", href: "/main/news" },
+          { label: "Актуальное", href: "/main" },
             ].map((item, index) => (
               <Link
                 key={index}

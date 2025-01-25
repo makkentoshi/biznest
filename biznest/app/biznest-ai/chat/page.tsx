@@ -40,11 +40,11 @@ export default function ChatPage() {
     },
     { scope: chatRef }
   );
-  useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [messages]);
+  // useEffect(() => {
+  //   if (messagesEndRef.current) {
+  //     messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // }, [messages]);
 
   // Загрузка истории чатов
   //   useEffect(() => {

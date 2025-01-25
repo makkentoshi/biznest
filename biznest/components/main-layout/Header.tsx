@@ -5,6 +5,7 @@ import {
   TouchpadOff,
   FileDigit,
   Download,
+  MonitorCheck,
   User,
   MessageSquare,
   Newspaper,
@@ -33,6 +34,11 @@ export default function Header() {
       label: "Новости",
       href: "/main/news",
       icon: <Newspaper className="h-5 w-5 mr-2" />,
+    },
+    {
+      label: "Biznest Finance",
+      href: "/biznest-ai/dashboard",
+      icon: <MonitorCheck className="h-5 w-5 mr-2"></MonitorCheck>,
     },
   ];
 
