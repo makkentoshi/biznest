@@ -46,7 +46,9 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 bg-white border-b rounded-xl border-gray-200 z-50 p-3">
       <div className="flex items-center justify-between h-16 px-4">
         <div className="flex items-center flex-1">
-          <span className="text-2xl font-bold text-black">BizNest</span>
+          <Link href={"/"}>
+            <span className="text-2xl font-bold text-black cursor-pointer">BizNest</span>
+          </Link>
           <div className="ml-6 flex-1 max-w-2xl ">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />

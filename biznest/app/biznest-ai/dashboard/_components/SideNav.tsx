@@ -38,6 +38,12 @@ function SideNav() {
       icon: ReceiptText,
       path: "/biznest-ai/dashboard/expenses",
     },
+    {
+      id: 4,
+      name: "Finance Чат",
+      icon: ShieldCheck,
+      path: "/biznest-ai/dashboard/chat",
+    },
     // {
     //   id: 2,
     //   name: "Investments",
@@ -51,7 +57,7 @@ function SideNav() {
     //   path: "/dashboard/debts",
     // },
     {
-      id: 4,
+      id: 5,
       name: "Платная подписка",
       icon: ShieldCheck,
       path: "/biznest-ai/dashboard/upgrade",

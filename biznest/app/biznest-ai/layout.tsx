@@ -13,7 +13,7 @@ export default function HomeLayout({
           {children}
         </div>
       </div>
-      <Footer />
+
     </main>
   );
 }

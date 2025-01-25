@@ -73,11 +73,7 @@ const menuItems = [
     icon: ShoppingBag,
     href: "/main/marketplace",
   },
-  {
-    title: "Удаленная работа",
-    icon: Plane,
-    href: "/main/relocation",
-  },
+
   {
     title: "Образовательные видео",
     icon: PackageOpen,

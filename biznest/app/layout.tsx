@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
+import { ChatWidget } from "@/components/ui/chat-widget";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,9 @@ export default function RootLayout({
       <html lang="ru">
         <body className={inter.className}>
           <div>{children}</div>
+          <div className="fixed bottom-6 right-6 z-50">
+          <ChatWidget />
+          </div>
         </body>
       </html>
     </ClerkProvider>

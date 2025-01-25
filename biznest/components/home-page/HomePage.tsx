@@ -169,8 +169,8 @@ export default function MainPage() {
           </div>
         </section>
 
-        {/* Stats Section */}
-        <section className="stats-section py-20 bg-gradient-to-b from-gray-900/30 to-black">
+        
+        {/* <section className="stats-section py-20 bg-gradient-to-b from-gray-900/30 to-black">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               {[
@@ -188,7 +188,7 @@ export default function MainPage() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
       {/* Pricing Section */}
 
