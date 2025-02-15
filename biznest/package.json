@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@clerk/nextjs": "^6.9.7",
+    "@google-cloud/vertexai": "^1.9.3",
     "@gsap/react": "^2.1.1",
     "@neondatabase/serverless": "^0.10.4",
     "@radix-ui/react-alert-dialog": "^1.1.4",
@@ -39,6 +40,7 @@
     "nodemailer": "^6.9.16",
     "npm": "^11.0.0",
     "openai": "^4.78.0",
+    "pdf-parse": "^1.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "recharts": "^2.15.0",
@@ -46,6 +48,7 @@
     "swr": "^2.3.0",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
+    "telegraf": "^4.16.3",
     "telegram": "^2.26.16"
   },
   "devDependencies": {

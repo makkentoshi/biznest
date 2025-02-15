@@ -4,7 +4,9 @@ import {
   pgTable,
   serial,
   varchar,
+  boolean
 } from "drizzle-orm/pg-core";
+
 
 export const Budgets = pgTable("budgets", {
   id: serial("id").primaryKey(),
@@ -28,4 +30,13 @@ export const Incomes = pgTable("incomes", {
   amount: numeric("amount").notNull(),
   icon: varchar("icon"),
   createdby: varchar("createdby").notNull(),
+});
+
+export const Bots = pgTable("bots", {
+  id: serial("id").primaryKey(),
+  userId: varchar("userId", { length: 256 }).notNull(), // Просто строка без связи с users
+  botToken: varchar("bot_token", { length: 256 }).notNull(),
+  prompt: varchar("prompt", { length: 4096 }).default("Вы - полезный ассистент."),
+  triggerWords: varchar("trigger_words", { length: 256 }).array().default([]),
+  isAIEnabled: boolean("is_ai_enabled").default(true),
 });

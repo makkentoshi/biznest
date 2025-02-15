@@ -9,21 +9,31 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import TelegramHeader from "./_components/TelegramHeader";
 
-export default function BiznestToolPage() {
+export default function TelegramBotPage() {
   const [isAIEnabled, setIsAIEnabled] = useState(true);
   const [prompt, setPrompt] = useState("");
   const [triggerWords, setTriggerWords] = useState("");
+  const [botToken, setBotToken] = useState(""); // Add botToken state
 
   // Загрузка данных бота при открытии страницы
   useEffect(() => {
     const fetchBotData = async () => {
-      const response = await fetch("/api/get-tg-bot");
-      const data = await response.json();
+      try {
+        const response = await fetch("/api/get-tg-bot"); // Updated route
+        if (!response.ok) {
+          console.error("Failed to fetch bot data:", response.status);
+          return;
+        }
+        const data = await response.json();
 
-      if (data.success) {
-        setPrompt(data.bot.prompt);
-        setTriggerWords(data.bot.triggerWords.join(", "));
-        setIsAIEnabled(data.bot.isAIEnabled);
+        if (data.success) {
+          setPrompt(data.bot.prompt);
+          setTriggerWords(data.bot.triggerWords.join(", "));
+          setIsAIEnabled(data.bot.isAIEnabled);
+          setBotToken(data.bot.botToken); // Assuming botToken is returned
+        }
+      } catch (error) {
+        console.error("Error fetching bot data:", error);
       }
     };
 
@@ -31,22 +41,43 @@ export default function BiznestToolPage() {
   }, []);
 
   const handleSaveSettings = async () => {
-    const response = await fetch("/api/update-tg-bot", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        prompt,
-        triggerWords,
-        isAIEnabled,
-      }),
-    });
+    try {
+      const response = await fetch("/api/update-tg-bot", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          prompt,
+          triggerWords,
+          isAIEnabled,
+          botToken,
+        }),
+      });
 
-    const data = await response.json();
-    if (data.success) {
-      alert("Настройки сохранены!");
-    } else {
+      console.log(
+        "Received request data:",
+        JSON.stringify({
+          prompt,
+          triggerWords,
+          isAIEnabled,
+          botToken,
+        })
+      );
+
+      if (!response.ok) {
+        console.error("Failed to save settings:", response.status);
+        alert("Ошибка при сохранении настроек");
+        return;
+      }
+      const data = await response.json();
+      if (data.success) {
+        alert("Настройки сохранены!");
+      } else {
+        alert("Ошибка при сохранении настроек");
+      }
+    } catch (error) {
+      console.error("Error saving settings:", error);
       alert("Ошибка при сохранении настроек");
     }
   };
@@ -68,6 +99,20 @@ export default function BiznestToolPage() {
           {/* Панель конфигурации */}
           <Card className="md:col-span-3">
             <div className="space-y-4 p-4">
+              {/* Bot Token */}
+              <div className="space-y-2">
+                <label className="flex items-center space-x-2 text-sm text-gray-700">
+                  <Bot className="h-4 w-4 text-gray-500" />
+                  <span>Telegram Bot Token</span>
+                </label>
+                <Input
+                  placeholder="Enter your bot token from BotFather"
+                  value={botToken}
+                  onChange={(e) => setBotToken(e.target.value)}
+                  className="border-gray-200 text-sm placeholder:text-gray-400 focus:border-gray-300 focus:ring-gray-200"
+                />
+              </div>
+
               {/* Переключатель ИИ */}
               <div className="flex items-center justify-between border-b border-gray-100 pb-4">
                 <div className="flex items-center space-x-2">

@@ -46,6 +46,8 @@ function CreateIncomes({ refreshData }) {
       toast("New Income Source Created!");
     }
   };
+
+  
   return (
     <div>
       <Dialog>

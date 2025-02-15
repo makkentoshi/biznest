@@ -78,7 +78,7 @@ export default function DashboardHeader() {
               </Link>
             </SignedOut>
             <SignedOut>
-              <Link href="/home" className="nav-item">
+              <Link href="/main" className="nav-item">
                 <Button
                   variant="default"
                   className="border-white text-white  hover:text-gray-300"
@@ -115,7 +115,7 @@ export default function DashboardHeader() {
               </a>
             ))}
             <SignedOut>
-              <Link href="/home">
+              <Link href="/main">
                 <Button
                   variant="outline"
                   className="w-full border-white text-white hover:bg-white hover:text-black"
