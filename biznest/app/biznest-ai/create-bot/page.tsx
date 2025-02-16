@@ -1,80 +1,104 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useRouter } from "next/navigation";
-import TelegramHeader from "./_components/TelegramHeader";
+import { db } from "@/utils/dbConfig";
+import { Bots } from "@/utils/schema";
+import { useUser } from "@clerk/nextjs";
+import { toast } from "sonner";
 
-export default function CreateBotPage() {
+function CreateBot({ refreshData }) {
   const [botName, setBotName] = useState("");
   const [prompt, setPrompt] = useState("");
   const [triggerWords, setTriggerWords] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
-  const router = useRouter();
+  const [botToken, setBotToken] = useState("");
 
-  const handleCreateBot = async () => {
-    setIsLoading(true);
+  const { user } = useUser();
 
-    // Отправка данных на сервер для создания бота
-    const response = await fetch("/api/create-tg-bot", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        botName,
-        prompt,
-        triggerWords,
-      }),
-    });
-
-    const data = await response.json();
-    setIsLoading(false);
-
-    if (data.success) {
-      // Редирект на страницу управления ботом
-      router.push("/biznest-ai/biznest-tool");
-    } else {
-      alert("Ошибка при создании бота");
+  /**
+   * Used to Create New Telegram Bot
+   */
+  const onCreateBot = async () => {
+    if (!botName || !botToken) {
+      toast("Please enter all fields!");
+      return;
+    }
+  
+    try {
+      const result = await db
+        .insert(Bots)
+        .values({
+          userId: user?.primaryEmailAddress?.emailAddress ?? "Unknown", // Исправлено!
+          botToken: botToken,  // Исправлено!
+          prompt: prompt || "Вы - полезный ассистент.", // Значение по умолчанию
+          triggerWords: Array.isArray(triggerWords) ? triggerWords : [], // Гарантия массива
+          isAIEnabled: true, // По умолчанию true
+        })
+        .returning({ insertedId: Bots.id });
+  
+      if (result) {
+        refreshData();
+        toast("New Telegram Bot Created!");
+      }
+    } catch (error) {
+      console.error("Error inserting data:", error);
+      toast("Failed to create bot!");
     }
   };
 
   return (
-    <main className="min-h-screen bg-white">
-      <TelegramHeader />
-      <div className="mx-auto max-w-5xl px-2 py-[10rem]">
-        <div className="mb-8">
-          <h1 className="bg-gradient-to-r from-gray-900 via-gray-700 to-gray-900 bg-clip-text text-2xl font-medium text-transparent">
-            Создать ИИ-бота
-          </h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Настройте поведение и ответы вашего Telegram-бота
-          </p>
-        </div>
-
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>Create Bot</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Create a Telegram Bot</DialogTitle>
+          <DialogDescription>
+            Set up the bot name, prompt, trigger words, and API token.
+          </DialogDescription>
+        </DialogHeader>
         <div className="space-y-4">
           <Input
-            placeholder="Имя бота"
+            placeholder="Bot Name"
             value={botName}
             onChange={(e) => setBotName(e.target.value)}
           />
-          <Textarea
-            placeholder="Промпт бота (например, 'Отвечай как поддержка магазина')"
-            value={prompt}
-            onChange={(e) => setPrompt(e.target.value)}
+          <Input
+            placeholder="Bot Token"
+            value={botToken}
+            onChange={(e) => setBotToken(e.target.value)}
           />
           <Input
-            placeholder="Триггерные слова (через запятую)"
+            placeholder="Trigger Words (comma separated)"
             value={triggerWords}
             onChange={(e) => setTriggerWords(e.target.value)}
           />
-          <Button onClick={handleCreateBot} disabled={isLoading}>
-            {isLoading ? "Создание..." : "Создать бота"}
-          </Button>
+          <Input
+            placeholder="Prompt (e.g., 'Act as a store support bot')"
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
         </div>
-      </div>
-    </main>
+        <DialogFooter>
+          <DialogClose asChild>
+            <Button onClick={onCreateBot}>Create</Button>
+          </DialogClose>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }
+
+export default CreateBot;
